@@ -1,0 +1,52 @@
+Bayesian clustering principal component analysis (BC-PCA) program:
+
+Kenji Okamoto and Yasushi Sako, RIKEN
+revised: 2016.06.22
+
+System Requirements:
+  VB-HMM softwares can be built on darwin or linux operating system.
+
+  GNU Scientific Library (GSL) and Eigen must be installed to build softwares.
+  http://www.gnu.org/software/gsl/
+  http://eigen.tuxfamily.org/
+
+Build:
+  Type the following line on command-line to build softwares.
+
+    make [command]
+
+  Avilable [command] is as follows:
+    pca      : to build VB-HMM-TS (vbHmmTs)
+    gauss    : to build VB-HMM-TS-FRET (vbHmmTsFret)
+    all      : to build all above
+    [blank]  : same as 'pca'
+    clean    : delete binary files
+
+First Step:
+  On Unix/Linux terminal, in the directory of source files, type
+
+    make pca
+
+  to build VB-PCA fostware.
+  In order to execute, type, for example,
+
+    bcPCA 5 5 1000 1e-10 500 100 data gamma
+
+  syntax: bcPCA kDim mDim maxIteration lbPosTh annealSteps repetition filename [baseGamma]
+  where paramters mean:
+    kDim         : k-dimension, maximum number of cluster
+    mDim         : m-dimension, maximum number of principal components
+                   for each cluster
+    maxIteration : maximum iteration if inference does not reach threshold
+    lbPosTh      : stop iteration if inference reaches this value
+    annealSteps  : iteration for simulated annealing
+    repetition   : number of repetition with an initial condition
+    filename     : name of data file
+    baseGamma    : filename for Gamma distribution for initialization (optional)
+
+    data file format for VB-HMM-TS-FRET software:
+      an arrya of numbers in plain text. Refer to 'testData'.
+      1st data : lDim
+      2nd data : nDim
+      3rd data- : nDim x lDim data
+
